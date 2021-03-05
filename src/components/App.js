@@ -4,6 +4,9 @@ import Card from "./Card/Card.jsx";
 
 class App extends Component {
   state = {
+    goodThingsCount: 0,
+    badThingsCount: 0,
+    actionItemsCount: 0,
     categories: {
       goodThings: [],
       badThings: [],
@@ -29,26 +32,65 @@ class App extends Component {
       window.alert("input required");
     }
   };
+
   Delete = (id) => {
     this.setState({
-      Cards: this.state.Cards.filter((card) => card.id !== id),
+      Cards: this.state.Cards.filter((card) => {
+        if (card.id !== id) {
+          return true;
+        } else {
+          this.ChangeCounter(card.type, "decrease");
+          return false;
+        }
+      }),
     });
   };
 
-  CreateCard = (type, input) =>
+  ChangeCounter = (type, operation) => {
+    let goodThingsCount = this.state.goodThingsCount;
+    let badThingsCount = this.state.badThingsCount;
+    let actionItemsCount = this.state.actionItemsCount;
+
+    if (type === "Good things") {
+      operation === "increase" ? goodThingsCount++ : goodThingsCount--;
+    } else if (type === "Bad things") {
+      operation === "increase" ? badThingsCount++ : badThingsCount--;
+    } else if (type === "Action items") {
+      operation === "increase" ? actionItemsCount++ : actionItemsCount--;
+    }
+    this.setState({ goodThingsCount, badThingsCount, actionItemsCount });
+  };
+
+  CreateCard = (type, input) => {
+    let goodThingsCount = this.state.goodThingsCount;
+    let badThingsCount = this.state.badThingsCount;
+    let actionItemsCount = this.state.actionItemsCount;
+
+    if (type === "Good things") {
+      goodThingsCount++;
+    } else if (type === "Bad things") {
+      badThingsCount++;
+    } else if (type === "Action items") {
+      actionItemsCount++;
+    }
     this.setState({
       Cards: [
         ...this.state.Cards,
         {
           id: this.state.id,
+
           type: type,
           input: input,
           likes: 0,
-          createDate: 10,
+          createDate: Date.now(),
         },
       ],
       id: this.state.id + 1,
+      goodThingsCount,
+      badThingsCount,
+      actionItemsCount,
     });
+  };
 
   MoveLeft = (id, idx) => {
     let newCards = [...this.state.Cards];
@@ -109,7 +151,7 @@ class App extends Component {
           <div className="row">
             <div className="col">
               <h4>Good things</h4>
-              <span> 0 </span>
+              <span> {this.state.goodThingsCount} </span>
               <button
                 type="button"
                 className="addButton"
@@ -145,7 +187,7 @@ class App extends Component {
             </div>
             <div className="col">
               <h4>Bad things</h4>
-              <span> 0 </span>
+              <span>{this.state.badThingsCount} </span>
               <button
                 type="button"
                 className="addButton"
@@ -181,7 +223,7 @@ class App extends Component {
             </div>
             <div className="col">
               <h4>Action items</h4>
-              <span> 0 </span>
+              <span>{this.state.actionItemsCount} </span>
               <button
                 type="button"
                 className="addButton"
