@@ -16,7 +16,6 @@ class App extends Component {
     id: 0,
     Cards: [],
     likes: 0,
-    createDate: null,
   };
 
   userInput = (e, idx) => {
@@ -82,7 +81,6 @@ class App extends Component {
           type: type,
           input: input,
           likes: 0,
-          createDate: Date.now(),
         },
       ],
       id: this.state.id + 1,
@@ -93,38 +91,62 @@ class App extends Component {
   };
 
   MoveLeft = (id, idx) => {
+    let goodThingsCount = this.state.goodThingsCount;
+    let badThingsCount = this.state.badThingsCount;
+    let actionItemsCount = this.state.actionItemsCount;
     let newCards = [...this.state.Cards];
     for (let card of newCards) {
       if (card.id === id && card.type === "Good things") {
+        goodThingsCount--;
+        actionItemsCount++;
         card.type = "Action items";
       } else if (card.id === id && card.type === "Bad things") {
         card.type = "Good things";
+        badThingsCount--;
+        goodThingsCount++;
       } else if (card.id === id && card.type === "Action items") {
         card.type = "Bad things";
+        actionItemsCount--;
+        badThingsCount++;
       }
     }
     newCards.push(newCards[idx]);
     newCards.splice(idx, 1);
     this.setState({
       Cards: newCards,
+      goodThingsCount,
+      badThingsCount,
+      actionItemsCount,
     });
   };
 
   MoveRight = (id, idx) => {
+    let goodThingsCount = this.state.goodThingsCount;
+    let badThingsCount = this.state.badThingsCount;
+    let actionItemsCount = this.state.actionItemsCount;
     let newCards = [...this.state.Cards];
     for (let card of newCards) {
       if (card.id === id && card.type === "Good things") {
         card.type = "Bad things";
+        goodThingsCount--;
+        badThingsCount++;
       } else if (card.id === id && card.type === "Bad things") {
         card.type = "Action items";
+        badThingsCount--;
+        actionItemsCount++;
       } else if (card.id === id && card.type === "Action items") {
         card.type = "Good things";
+        actionItemsCount--;
+        goodThingsCount++;
       }
     }
     newCards.push(newCards[idx]);
     newCards.splice(idx, 1);
     this.setState({
       Cards: newCards,
+      goodThingsCount,
+      badThingsCount,
+      actionItemsCount,
     });
   };
 
@@ -177,7 +199,6 @@ class App extends Component {
                       handleLikes={this.handleLikes}
                       handleDislikes={this.handleDislikes}
                       color={"goodThings"}
-                      createDate={card.createDate}
                     />
                   );
                 } else {
@@ -213,7 +234,6 @@ class App extends Component {
                       handleLikes={this.handleLikes}
                       handleDislikes={this.handleDislikes}
                       color={"badThings"}
-                      createDate={card.createDate}
                     />
                   );
                 } else {
@@ -249,7 +269,6 @@ class App extends Component {
                       handleLikes={this.handleLikes}
                       handleDislikes={this.handleDislikes}
                       color={"actionItems"}
-                      createDate={card.createDate}
                     />
                   );
                 } else {
