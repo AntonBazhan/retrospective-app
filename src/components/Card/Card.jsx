@@ -3,15 +3,24 @@ import React, { Component } from "react";
 class Card extends Component {
   constructor(props) {
     super(props);
-
+    console.log(props);
     this.userInput = this.props.userInput.bind(this);
     this.handleLikes = this.props.handleLikes.bind(this);
     this.handleDislikes = this.props.handleDislikes.bind(this);
     this.MoveLeft = this.props.MoveLeft.bind(this);
     this.MoveRight = this.props.MoveRight.bind(this);
   }
+
   render() {
-    const { color, value, idx, validateInput, cardId, likesCount } = this.props;
+    const {
+      color,
+      value,
+      idx,
+      validateInput,
+      cardId,
+      likesCount,
+      createDate,
+    } = this.props;
     return (
       <div className={"boardItem card " + color}>
         <br />
@@ -35,7 +44,7 @@ class Card extends Component {
               title="Move card to the left"
             />
           </button>
-          <i>Created: {}</i>
+          <i>Created: {createDate}</i>
           <button onClick={() => this.handleLikes(idx)}>
             {" "}
             <i className="far fa-far fa-thumbs-up" title="Likes" />

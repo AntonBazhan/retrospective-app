@@ -13,6 +13,7 @@ class App extends Component {
     id: 0,
     Cards: [],
     likes: 0,
+    createDate: null,
   };
 
   userInput = (e, idx) => {
@@ -43,6 +44,7 @@ class App extends Component {
           type: type,
           input: input,
           likes: 0,
+          createDate: 10,
         },
       ],
       id: this.state.id + 1,
@@ -133,6 +135,7 @@ class App extends Component {
                       handleLikes={this.handleLikes}
                       handleDislikes={this.handleDislikes}
                       color={"goodThings"}
+                      createDate={card.createDate}
                     />
                   );
                 } else {
@@ -168,6 +171,7 @@ class App extends Component {
                       handleLikes={this.handleLikes}
                       handleDislikes={this.handleDislikes}
                       color={"badThings"}
+                      createDate={card.createDate}
                     />
                   );
                 } else {
@@ -203,6 +207,7 @@ class App extends Component {
                       handleLikes={this.handleLikes}
                       handleDislikes={this.handleDislikes}
                       color={"actionItems"}
+                      createDate={card.createDate}
                     />
                   );
                 } else {
