@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  background: rgb(111, 112, 54);
+  color: #fff;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.app {
+  max-width: 1200px;
+  padding: 0 0.25rem;
+  margin: auto;
+  font-family: "Roboto", sans-serif;
+}
+
+.button {
+  display: inline-block;
+  background: transparent;
+  border: none;
+  line-height: 1;
+  padding: 0;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.6);
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: center;
+}
+
+*:focus {
+  outline: none;
+}
+
+.boardItem {
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  margin-top: 10px;
+  color: #fff;
+  padding: 20px;
+}
+
+.boardItem textarea {
+  background: transparent;
+  border: 0;
+  font-size: 1rem;
+  color: #fff;
+  min-height: 60px;
+  resize: none;
+  overflow: visible;
+  text-align: center;
+}
+
+.boardItem textarea::placeholder {
+  transition: 0.3s ease all;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.boardItem textarea:focus::placeholder {
+  color: rgba(255, 255, 255, 0);
+  transition: 0.3s ease all;
+}
+
+.addButton {
+  width: 100%;
+  background: #ccc;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-bottom: 3px solid #aaa;
+}
+
+.addButton:hover {
+  background: #ddd;
+  transition: 0.3s ease all;
+}
+
+.functionNav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.functionNav button {
+  background: transparent;
+  border: none;
+  line-height: 1;
+  padding: 0;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.functionNav button:hover {
+  color: rgba(255, 255, 255, 1);
+  transition: 0.3s ease all;
+}
+
+.boardCntr > * {
+  width: 100%;
+  margin: 0 10px;
+}
+
+.flexform {
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-align: center;
+}
+
+textarea {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+}
+.goodThings {
+  background: #01dd89;
+  margin: 5px;
+}
+
+.badThings {
+  background: #f3316b;
+  margin: 5px;
+}
+
+.actionItems {
+  background: #c62fda;
+  margin: 5px;
+}
