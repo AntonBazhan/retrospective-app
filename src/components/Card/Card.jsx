@@ -21,8 +21,6 @@ class Card extends Component {
           className="flexform"
           placeholder="Enter Text Here"
           value={value}
-          onChange={(e) => this.userInput(e, idx)}
-          onBlur={validateInput}
         />
         <br />
         <div className="functionNav">

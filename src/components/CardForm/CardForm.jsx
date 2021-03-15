@@ -13,7 +13,12 @@ class CardForm extends Component {
   }
 
   handleFormVisibility() {
-    this.changeCardFormVisibility(true);
+    this.props.changeCardFormVisibility(false);
+  }
+
+  handleCreationCard() {
+    this.props.changeCardFormVisibility(false);
+    this.props.CreateCard(this.props.type, this.state.value);
   }
 
   render() {
@@ -28,15 +33,9 @@ class CardForm extends Component {
         />
         <br />
         <div className="functionNav">
-          <button
-            onClick={() => {
-              this.CreateCard(this.props.type, this.state.value);
-            }}
-          >
-            Save
-          </button>
+          <button onClick={this.handleCreationCard.bind(this)}>Save</button>
 
-          <button onClick={this.handleFormVisibility}>Cancel</button>
+          <button onClick={this.handleFormVisibility.bind(this)}>Cancel</button>
         </div>
       </div>
     );
