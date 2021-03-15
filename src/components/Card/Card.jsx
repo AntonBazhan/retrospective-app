@@ -9,11 +9,11 @@ class Card extends Component {
     this.handleDislikes = this.props.handleDislikes.bind(this);
     this.MoveLeft = this.props.MoveLeft.bind(this);
     this.MoveRight = this.props.MoveRight.bind(this);
-    this.Delete = this.props.Delete.bind(this);
+    this.Delete = this.props.Delete.bind(this, this.props.type, this.props.id);
   }
 
   render() {
-    const { color, value, idx, validateInput, cardId, likesCount } = this.props;
+    const { color, value, idx, cardId, likesCount } = this.props;
     return (
       <div className={"boardItem card " + color}>
         <br />

@@ -29,22 +29,22 @@ class App extends Component {
     });
   };
 
-  validateInput = (e) => {
-    if (e.target.value === "") {
-      window.alert("input required");
-    }
-  };
+  Delete = (type, id) => {
+    let goodThingsCards = [...this.state.goodThingsCards];
+    let badThingsCards = [...this.state.badThingsCards];
+    let actionItemsCards = [...this.state.actionItemsCards];
 
-  Delete = (id) => {
+    if (type === "Good things") {
+      goodThingsCards.filter((card) => card.id !== id);
+    } else if (type === "Bad things") {
+      badThingsCards.filter((card) => card.id !== id);
+    } else if (type === "Action items") {
+      actionItemsCards.filter((card) => card.id !== id);
+    }
     this.setState({
-      Cards: this.state.Cards.filter((card) => {
-        if (card.id !== id) {
-          return true;
-        } else {
-          this.ChangeCounter(card.type, "decrease");
-          return false;
-        }
-      }),
+      goodThingsCards,
+      badThingsCards,
+      actionItemsCards,
     });
   };
 
@@ -69,15 +69,28 @@ class App extends Component {
     let actionItemsCards = [...this.state.actionItemsCards];
 
     if (type === "Good things") {
-      goodThingsCards.push({ type, likes: 0, input, creationDate: Date.now() });
+      goodThingsCards.push({
+        type,
+        likes: 0,
+        input,
+        creationDate: Date.now(),
+        id: this.state.goodThingsCards.length,
+      });
     } else if (type === "Bad things") {
-      badThingsCards.push({ type, likes: 0, input, creationDate: Date.now() });
+      badThingsCards.push({
+        type,
+        likes: 0,
+        input,
+        creationDate: Date.now(),
+        id: this.state.badThingsCards.length,
+      });
     } else if (type === "Action items") {
       actionItemsCards.push({
         type,
         likes: 0,
         input,
         creationDate: Date.now(),
+        id: this.state.actionItemsCards.length,
       });
     }
     this.setState({

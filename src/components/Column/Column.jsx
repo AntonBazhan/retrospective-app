@@ -43,6 +43,7 @@ class Column extends Component {
         {this.props.cards.map((card, idx) => {
           return (
             <Card
+              type={card.type}
               key={card.type + idx}
               idx={idx}
               cardId={card.id}
