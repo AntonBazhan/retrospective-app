@@ -35,7 +35,7 @@ class Card extends Component {
         <br />
 
         <span>
-          Creation:{moment(creationDate).format("dddd DD MMMM YYYY, HH:mm:ss")}
+          Creation:{moment(creationDate).format("DD.MM.YY, HH:mm:ss")}
         </span>
         <div className="functionNav">
           <button onClick={this.handleLikes}>

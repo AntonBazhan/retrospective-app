@@ -72,29 +72,30 @@ class App extends Component {
     let actionItemsCards = [...this.state.actionItemsCards];
 
     if (type === "Good things") {
-      goodThingsCards = goodThingsCards
-      .map((card) => {
+      goodThingsCards = goodThingsCards.map((card) => {
         if (card.id === id) {
           card.likes++;
         }
         return card;
-      })
-      .sort((a,b)=>b.likes-a.likes)
+      });
     } else if (type === "Bad things") {
       badThingsCards = badThingsCards.map((card) => {
         if (card.id === id) {
           card.likes++;
         }
         return card;
-      }).sort((a,b)=>b.likes-a.likes)
+      });
     } else if (type === "Action items") {
       actionItemsCards = actionItemsCards.map((card) => {
         if (card.id === id) {
           card.likes++;
         }
         return card;
-      }).sort((a,b)=>b.likes-a.likes)
+      });
     }
+    goodThingsCards.sort((a, b) => b.likes - a.likes);
+    badThingsCards.sort((a, b) => b.likes - a.likes);
+    actionItemsCards.sort((a, b) => b.likes - a.likes);
     this.setState({
       goodThingsCards,
       badThingsCards,
@@ -113,22 +114,27 @@ class App extends Component {
           card.likes--;
         }
         return card;
-      }).sort((a,b)=>b.likes-a.likes)
+      });
     } else if (type === "Bad things") {
       badThingsCards = badThingsCards.map((card) => {
         if (card.id === id) {
           card.likes--;
         }
         return card;
-      }).sort((a,b)=>b.likes-a.likes)
+      });
     } else if (type === "Action items") {
       actionItemsCards = actionItemsCards.map((card) => {
         if (card.id === id) {
           card.likes--;
         }
         return card;
-      }).sort((a,b)=>b.likes-a.likes)
+      });
     }
+
+    goodThingsCards.sort((a, b) => b.likes - a.likes);
+    badThingsCards.sort((a, b) => b.likes - a.likes);
+    actionItemsCards.sort((a, b) => b.likes - a.likes);
+
     this.setState({
       goodThingsCards,
       badThingsCards,

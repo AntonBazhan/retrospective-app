@@ -44,8 +44,6 @@ class Column extends Component {
           return (
             <Card
               type={card.type}
-              key={card.type + idx}
-              idx={idx}
               cardId={card.id}
               value={card.input}
               Delete={this.props.Delete}
@@ -54,6 +52,7 @@ class Column extends Component {
               handleDislikes={this.props.handleDislikes}
               color={this.props.color}
               creationDate={card.creationDate}
+              key={card.type + card.id}
             />
           );
         })}
