@@ -5,28 +5,9 @@ import Column from "./Column/Column";
 
 class App extends Component {
   state = {
-    goodThingsCount: 0,
-    badThingsCount: 0,
-    actionItemsCount: 0,
-    categories: {
-      goodThings: [],
-      badThings: [],
-      actionItems: [],
-    },
-    userInput: "",
-    id: 0,
-    likes: 0,
     goodThingsCards: [],
     badThingsCards: [],
     actionItemsCards: [],
-  };
-
-  userInput = (e, idx) => {
-    let newCards = [...this.state.Cards];
-    newCards[idx].input = e.target.value;
-    this.setState({
-      Cards: newCards,
-    });
   };
 
   Delete = (type, id) => {
@@ -46,21 +27,6 @@ class App extends Component {
       badThingsCards,
       actionItemsCards,
     });
-  };
-
-  ChangeCounter = (type, operation) => {
-    let goodThingsCount = this.state.goodThingsCount;
-    let badThingsCount = this.state.badThingsCount;
-    let actionItemsCount = this.state.actionItemsCount;
-
-    if (type === "Good things") {
-      operation === "increase" ? goodThingsCount++ : goodThingsCount--;
-    } else if (type === "Bad things") {
-      operation === "increase" ? badThingsCount++ : badThingsCount--;
-    } else if (type === "Action items") {
-      operation === "increase" ? actionItemsCount++ : actionItemsCount--;
-    }
-    this.setState({ goodThingsCount, badThingsCount, actionItemsCount });
   };
 
   CreateCard = (type, input) => {
@@ -100,92 +66,34 @@ class App extends Component {
     });
   };
 
-  MoveLeft = (id, idx) => {
-    let goodThingsCount = this.state.goodThingsCount;
-    let badThingsCount = this.state.badThingsCount;
-    let actionItemsCount = this.state.actionItemsCount;
-    let newCards = [...this.state.Cards];
-    for (let card of newCards) {
-      if (card.id === id && card.type === "Good things") {
-        goodThingsCount--;
-        actionItemsCount++;
-        card.type = "Action items";
-      } else if (card.id === id && card.type === "Bad things") {
-        card.type = "Good things";
-        badThingsCount--;
-        goodThingsCount++;
-      } else if (card.id === id && card.type === "Action items") {
-        card.type = "Bad things";
-        actionItemsCount--;
-        badThingsCount++;
-      }
-    }
-    newCards.push(newCards[idx]);
-    newCards.splice(idx, 1);
-    this.setState({
-      Cards: newCards,
-      goodThingsCount,
-      badThingsCount,
-      actionItemsCount,
-    });
-  };
-
-  MoveRight = (id, idx) => {
-    let goodThingsCount = this.state.goodThingsCount;
-    let badThingsCount = this.state.badThingsCount;
-    let actionItemsCount = this.state.actionItemsCount;
-    let newCards = [...this.state.Cards];
-    for (let card of newCards) {
-      if (card.id === id && card.type === "Good things") {
-        card.type = "Bad things";
-        goodThingsCount--;
-        badThingsCount++;
-      } else if (card.id === id && card.type === "Bad things") {
-        card.type = "Action items";
-        badThingsCount--;
-        actionItemsCount++;
-      } else if (card.id === id && card.type === "Action items") {
-        card.type = "Good things";
-        actionItemsCount--;
-        goodThingsCount++;
-      }
-    }
-    newCards.push(newCards[idx]);
-    newCards.splice(idx, 1);
-    this.setState({
-      Cards: newCards,
-      goodThingsCount,
-      badThingsCount,
-      actionItemsCount,
-    });
-  };
-
   handleLikes = (type, id) => {
     let goodThingsCards = [...this.state.goodThingsCards];
     let badThingsCards = [...this.state.badThingsCards];
     let actionItemsCards = [...this.state.actionItemsCards];
 
     if (type === "Good things") {
-      goodThingsCards = goodThingsCards.map((card) => {
+      goodThingsCards = goodThingsCards
+      .map((card) => {
         if (card.id === id) {
-          card.id++;
+          card.likes++;
         }
         return card;
-      });
+      })
+      .sort((a,b)=>b.likes-a.likes)
     } else if (type === "Bad things") {
       badThingsCards = badThingsCards.map((card) => {
         if (card.id === id) {
-          card.id++;
+          card.likes++;
         }
         return card;
-      });
+      }).sort((a,b)=>b.likes-a.likes)
     } else if (type === "Action items") {
       actionItemsCards = actionItemsCards.map((card) => {
         if (card.id === id) {
-          card.id++;
+          card.likes++;
         }
         return card;
-      });
+      }).sort((a,b)=>b.likes-a.likes)
     }
     this.setState({
       goodThingsCards,
@@ -202,24 +110,24 @@ class App extends Component {
     if (type === "Good things") {
       goodThingsCards = goodThingsCards.map((card) => {
         if (card.id === id) {
-          card.id--;
+          card.likes--;
         }
         return card;
-      });
+      }).sort((a,b)=>b.likes-a.likes)
     } else if (type === "Bad things") {
       badThingsCards = badThingsCards.map((card) => {
         if (card.id === id) {
-          card.id--;
+          card.likes--;
         }
         return card;
-      });
+      }).sort((a,b)=>b.likes-a.likes)
     } else if (type === "Action items") {
       actionItemsCards = actionItemsCards.map((card) => {
         if (card.id === id) {
-          card.id--;
+          card.likes--;
         }
         return card;
-      });
+      }).sort((a,b)=>b.likes-a.likes)
     }
     this.setState({
       goodThingsCards,

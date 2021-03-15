@@ -48,15 +48,12 @@ class Column extends Component {
               idx={idx}
               cardId={card.id}
               value={card.input}
-              userInput={this.props.userInput}
-              validateInput={this.props.validateInput}
-              MoveLeft={this.props.MoveLeft}
               Delete={this.props.Delete}
-              MoveRight={this.props.MoveRight}
               likesCount={card.likes}
               handleLikes={this.props.handleLikes}
               handleDislikes={this.props.handleDislikes}
               color={this.props.color}
+              creationDate={card.creationDate}
             />
           );
         })}
