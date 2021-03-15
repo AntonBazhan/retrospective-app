@@ -35,11 +35,11 @@ class App extends Component {
     let actionItemsCards = [...this.state.actionItemsCards];
 
     if (type === "Good things") {
-      goodThingsCards.filter((card) => card.id !== id);
+      goodThingsCards = goodThingsCards.filter((card) => card.id !== id);
     } else if (type === "Bad things") {
-      badThingsCards.filter((card) => card.id !== id);
+      badThingsCards = badThingsCards.filter((card) => card.id !== id);
     } else if (type === "Action items") {
-      actionItemsCards.filter((card) => card.id !== id);
+      actionItemsCards = actionItemsCards.filter((card) => card.id !== id);
     }
     this.setState({
       goodThingsCards,
@@ -160,19 +160,71 @@ class App extends Component {
     });
   };
 
-  handleLikes = (idx) => {
-    let newCards = [...this.state.Cards];
-    newCards[idx].likes++;
+  handleLikes = (type, id) => {
+    let goodThingsCards = [...this.state.goodThingsCards];
+    let badThingsCards = [...this.state.badThingsCards];
+    let actionItemsCards = [...this.state.actionItemsCards];
+
+    if (type === "Good things") {
+      goodThingsCards = goodThingsCards.map((card) => {
+        if (card.id === id) {
+          card.id++;
+        }
+        return card;
+      });
+    } else if (type === "Bad things") {
+      badThingsCards = badThingsCards.map((card) => {
+        if (card.id === id) {
+          card.id++;
+        }
+        return card;
+      });
+    } else if (type === "Action items") {
+      actionItemsCards = actionItemsCards.map((card) => {
+        if (card.id === id) {
+          card.id++;
+        }
+        return card;
+      });
+    }
     this.setState({
-      Cards: newCards,
+      goodThingsCards,
+      badThingsCards,
+      actionItemsCards,
     });
   };
 
-  handleDislikes = (idx) => {
-    let newCards = [...this.state.Cards];
-    newCards[idx].likes--;
+  handleDislikes = (type, id) => {
+    let goodThingsCards = [...this.state.goodThingsCards];
+    let badThingsCards = [...this.state.badThingsCards];
+    let actionItemsCards = [...this.state.actionItemsCards];
+
+    if (type === "Good things") {
+      goodThingsCards = goodThingsCards.map((card) => {
+        if (card.id === id) {
+          card.id--;
+        }
+        return card;
+      });
+    } else if (type === "Bad things") {
+      badThingsCards = badThingsCards.map((card) => {
+        if (card.id === id) {
+          card.id--;
+        }
+        return card;
+      });
+    } else if (type === "Action items") {
+      actionItemsCards = actionItemsCards.map((card) => {
+        if (card.id === id) {
+          card.id--;
+        }
+        return card;
+      });
+    }
     this.setState({
-      Cards: newCards,
+      goodThingsCards,
+      badThingsCards,
+      actionItemsCards,
     });
   };
 

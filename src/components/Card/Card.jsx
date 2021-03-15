@@ -4,12 +4,24 @@ class Card extends Component {
   constructor(props) {
     super(props);
 
-    this.userInput = this.props.userInput.bind(this);
-    this.handleLikes = this.props.handleLikes.bind(this);
+    this.userInput = this.props.userInput.bind(
+      this,
+      this.props.type,
+      this.props.cardId
+    );
+    this.handleLikes = this.props.handleLikes.bind(
+      this,
+      this.props.type,
+      this.props.cardId
+    );
     this.handleDislikes = this.props.handleDislikes.bind(this);
     this.MoveLeft = this.props.MoveLeft.bind(this);
     this.MoveRight = this.props.MoveRight.bind(this);
-    this.Delete = this.props.Delete.bind(this, this.props.type, this.props.id);
+    this.Delete = this.props.Delete.bind(
+      this,
+      this.props.type,
+      this.props.cardId
+    );
   }
 
   render() {
@@ -20,7 +32,7 @@ class Card extends Component {
         <textarea
           className="flexform"
           placeholder="Enter Text Here"
-          value={value}
+          defaultValue={value}
         />
         <br />
         <div className="functionNav">
@@ -36,19 +48,19 @@ class Card extends Component {
             />
           </button>
 
-          <button onClick={() => this.handleLikes(idx)}>
+          <button onClick={this.handleLikes}>
             {" "}
             <i className="far fa-far fa-thumbs-up" title="Likes" />
           </button>
 
           <span>{likesCount}</span>
 
-          <button onClick={() => this.handleDislikes(idx)}>
+          <button onClick={this.handleDislikes}>
             {" "}
             <i className="far fa-thumbs-down" title="Dislikes" />
           </button>
 
-          <button onClick={() => this.Delete(cardId)}>
+          <button onClick={this.Delete}>
             {" "}
             <i className="far fa-trash-alt" title="Delete card" />
           </button>
