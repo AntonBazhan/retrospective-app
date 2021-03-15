@@ -14,6 +14,10 @@ class Column extends Component {
     this.setState({ isCardFormVisible });
   }
 
+  handleFormVisibility() {
+    this.setState({ isCardFormVisible: true });
+  }
+
   render() {
     return (
       <div className="col">
@@ -24,7 +28,7 @@ class Column extends Component {
           <button
             type="button"
             className="addButton"
-            onClick={(this.isCardFormVisible = true)}
+            onClick={this.handleFormVisibility.bind(this)}
           >
             +
           </button>
